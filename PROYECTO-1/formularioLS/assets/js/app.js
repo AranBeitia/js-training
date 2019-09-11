@@ -1,5 +1,5 @@
 /*** Variables ***/
-const listaTweets = document.getElementById("lista-tweets");
+const listaTweets = document.querySelector('#lista-tweets');
 
 /*** Event Listeners ***/
 eventListeners();
@@ -12,17 +12,22 @@ function eventListeners() {
 }
 
 /*** Funciones ***/
+//Añadir tewwt del formulario
 function agregarTweet(e) {
   e.preventDefault();
-  console.log('Formulario enviado');
-  //Leer el valor de textarea
+  //leer el valor de textares
   const tweet = document.getElementById('tweet').value;
-  //Crear elemento y añadirle el contenido a la lista
+  //crear boton de eliminar
+  const botonBorrar = document.createElement('a');
+  botonBorrar.classList = 'borrar-tweet';
+  botonBorrar.innerText = 'X';
+
+  //crear elemento y añadirlo a la lista
   const li = document.createElement('li');
   li.innerText = tweet;
-
+  //añade el boton de borrar twit de la lista
+  li.appendChild(botonBorrar);
+  //añade twit a la lista
   listaTweets.appendChild(li);
-
-
   console.log(tweet);
 }

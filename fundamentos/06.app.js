@@ -1,34 +1,36 @@
-const num1 = "50",
-      num2 = 10,
-      num3 = 'tres';
 
-console.log(num1 + num2);//5010
+// (video nº20)
+// const cpost = 90555;
 
-//formas de cambiar el tipo de string a number
-console.log(Number(num1));
-console.log(parseInt(num1));
+// console.log(cpost.length);//solo para cadenas de texto
 
-//extrañeza de JS
-console.log(num1 - num2);//lo resta bien
+// let cp;
+// cp = 90222;
+// console.log(typeof cp);//tipo numero
 
-console.log(Number(num3));//nan
+// cp = String(cp);
+// console.log(cp.length);
 
-let dato;
-dato = Number("20");
-dato = Number('20.10931');
-dato = Number(false);//0 -> false / 1 -> true
-dato = Number(null);
-dato = Number(undefined);
-dato = Number('Hola mundo');
-dato = Number([1, 2, 3]);
+// let dato;
+// dato = '4'+'4';
 
-// parsefloat parseInt
-dato = parseFloat('100.2030');
-dato = parseInt('100.54852');
+// //booleanos
+// dato= true;
+// dato = false;
 
-console.log(dato);
+// //de arreglo a string
+// dato = [1, 2, 3];
+// dato = String([1, 2, 3]);
 
-//to fixed
-dato = 23.2541;
-console.log(dato.toFixed(3));
+
+// //toString();
+// dato = 20;
+// dato = true;
+// dato = [1,2,3,4];
+// dato = dato.toString();
+
+// dato = String(dato);
+// console.log(dato);
+// console.log(dato.length);
+// console.log(typeof dato);
 
