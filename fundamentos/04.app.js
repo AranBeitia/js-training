@@ -1,41 +1,22 @@
-let valor;
-//no es necesario declatar el tipo de variable
-// valor = 'Cadena de texto';
-// valor = 20;
-// valor = true;
-// valor = null;
-// valor = undefined;
-// valor = {
-//   nombre: 'Aran'
-// }
+/*OPERADORES DE COMPARACION*/  
+const num1 = 20;
+const num2 = 50;
+const num3 = '20';
 
-valor = 'Aran';
-//todos son de tipo number, ni float ni integer
-valor = 20;
-valor = 20.20;
-valor = -30;
-valor = "20";//string
+console.log(num1 > num2);
+console.log(num1 < num2);
 
-/*TIPO PRIMITIVOS*/
-//booleanos
-valor = true;
-valor = false;
+//comparador de igual
+console.log(num1 == num3); //true
+console.log(num1 === num3); //false
 
-// null
-valor = null;//tipo objeto
+//diferentes
+console.log(20 != 3); //true
 
-// symbol (nuevo en js)
-valor = Symbol('Simbolo');
+console.log(20 == '20'); //true
 
-/*TIPO OBJETO O DE REFERENCIA*/
-//array y objeto
-valor = [1, 2, 3, 4];
-valor = {
-  nombre: 'Aran',
-  profesion: 'Desarrollador web'
-}
+//(a es menor que b hasta el final del abcdario, y luego mayusculas)
+console.log('a' > 'b'); //false 
 
-// fecha
-valor = new Date();
-
-console.log(typeof valor);
+console.log(null == undefined);//true
+console.log(null === undefined);//false

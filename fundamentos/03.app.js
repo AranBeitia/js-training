@@ -1,48 +1,41 @@
-//NUMEROS Y OPERACIONES MATEMATICAS
+let valor;
+//no es necesario declarar el tipo de variable
+valor = "Cadena de texto"; //string
+valor = 20; //number
+valor = true; //boolean
+valor = null; //null
+valor = undefined; //undefined
+valor = {
+  nombre: "Aran" //object
+};
 
-const num1 = 30;
-const num2= 20;
-const num3 = 20.20;
-const num4 = .1020;
-const num5 = -3;
+valor = "Aran";
+//todos los numeros son de tipo number, ni float ni integer
+valor = 20;
+valor = 20.2;
+valor = -30;
+valor = "20"; //string
 
-console.log(num1);
+/*TIPO PRIMITIVOS*/
+//booleanos
+valor = true;
+valor = false;
 
-let resultado;
-//suma
-resultado = num1 + num2;
-//resta
-resultado = num1 - num2;
-//multiplicar
-resultado = num1 * num2;
-//divisiones
-resultado = num1 / num2;
-//modulo
-resultado = num1 % num2;
-//pi
-resultado = Math.PI;
-//redondeo
-resultado = Math.round(2.4);
-//raiz cuadrada
-resultado = Math.sqrt(144);
-//absoluto
-resultado = Math.abs(num5);
-//potencia
-resultado = Math.pow(8, 3);
-//minimo
-resultado = Math.min(3, 6, 5, 1,9,7,8);
-//maximo
-resultado = Math.max(3, 6, 5, 1,9,7,8);
-//aleatorio
-resultado = Math.random();
+// null
+valor = null; //tipo objeto
 
-resultado = (10 + 20) * 5;
+// symbol (nuevo en js)
+valor = Symbol("Simbolo");
 
-resultado = (10 + 20 +20 + 40 +10) *.20;
+/*TIPO OBJETO O DE REFERENCIA*/
+//array y objeto
+valor = [1, 2, 3, 4];
+valor = {
+  nombre: "Aran",
+  profesion: "Desarrollador web"
+};
 
-console.log(resultado);
+// fecha
+valor = new Date();
 
-let puntaje = 10;
-
-console.log(puntaje);
-
+console.log(typeof valor);
