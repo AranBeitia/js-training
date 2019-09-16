@@ -29,10 +29,10 @@ console.log(meses.indexOf('Abril'));
 
 //Eliminar ultimo elemento de un arraglo
 meses.pop();
-
+console.log(meses);
 //Eliminar primer elemento de un arraglo
 meses.shift();
-
+console.log(meses);
 //Agregar al inicio del arreglo
 meses.unshift('Mes 0');
 console.log(meses);
@@ -59,16 +59,16 @@ console.log(frutas);
 arreglo1 = [1,3,99,8,21,56,100,10];//ordena raro
 arreglo1.sort();
 arreglo1.sort(function(x, y){
-  return x - y;
-})
+   return x - y;
+ })
 console.log(arreglo1);
 
-const numeros = [1, 2, 3];
+const numero = [1, 2, 3];
 
 /*CONST: no podemos reasignar el array entero, 
 pero sí modificar los valores individualmente*/
-numeros[0] = 4;
-numeros.push(5);
+numero[0] = 4;
+numero.push(5);
 
-numeros = ['Enero', 'Febrero']; // no podemos hacer esto
-console.log(numeros);
+//numero = ['Enero', 'Febrero']; // no podemos hacer esto
+console.log(numero);
