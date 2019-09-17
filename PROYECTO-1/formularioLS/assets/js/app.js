@@ -1,3 +1,4 @@
+//(video 63)
 /*** Variables ***/
 const listaTweets = document.querySelector("#lista-tweets");
 
