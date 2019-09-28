@@ -25,22 +25,19 @@ encabezado.innerText = "Super cursos";
 
 console.log(encabezado);
 
-//(video 46)
 // Query Selector - sí es necesario simbolo # o .
+const cabecera = document.querySelector('#encabezado');
 
-// const cabecera = document.querySelector('#encabezado');
-// //si hay más de una clase, sólo devuelve la primera
-// const cabecera1 = document.querySelector('.enlace');
-// //para que devuelva todas: queryelectorAll
-// const cabecera2 = document.querySelectorAll('img');
-// cabecera.textContent = 'Hello kitty';
+//Aplicar CSS
+cabecera.style.background ='#002aff';
+cabecera.style.color = '#fff200';
+cabecera.style.padding = '30px';
+cabecera.textContent = 'Hello kitty';
+console.log(cabecera);
 
-// console.log(cabecera);
+let enlace;
+enlace = document.querySelector('#principal a:first-child');
+enlace = document.querySelector('#principal a:nth-child(3)');
+enlace = document.querySelector('#principal a:last-child');
 
-// let enlace;
-
-// enlace = document.querySelector('#principal a:first-child');
-// enlace = document.querySelector('#principal a:nth-child(3)');
-// enlace = document.querySelector('#principal a:last-child');
-
-// console.log(enlace);
+console.log(enlace);
