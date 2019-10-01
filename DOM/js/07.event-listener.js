@@ -29,35 +29,38 @@ document.querySelector('#encabezado').addEventListener('click', function(e){
 });
 
 
-//(video 55)
-// document.querySelector('#encabezado').addEventListener('click', function(e){
-//   console.log(e.target.innerText = 'Nuevo titulo');
-// });
+//variables
+const encabezado = document.querySelector('#encabezado');
+const enlaces = document.querySelectorAll('.enlace');
+const boton = document.querySelector('#vaciar-carrito');
 
-// // Variables
-// const encabezado1 = document.querySelector('#encabezado');
-// const enlaces1 = document.querySelectorAll('.enlace');
-// const boton = document.querySelector('#vaciar-carrito');
+//click
+/*boton.addEventListener('click', obtenerEvento);*/
 
-// // Click
-// //boton.addEventListener('click', obtenerEvento);
-// //Doble click
-// //boton.addEventListener('dblclick', obtenerEvento);
-// //Mouse enter
-// //boton.addEventListener('mouseenter', obtenerEvento);
-// //Mouse leave
-// //boton.addEventListener('mouseleave', obtenerEvento);
-// //Mouse Over
-// //boton.addEventListener('mouseover', obtenerEvento);
-// //Mouse Out
-// //boton.addEventListener('mouseout', obtenerEvento);
-// //Mouse Down
-// //boton.addEventListener('mousedown', obtenerEvento);
-// //Mouse Up
-// //boton.addEventListener('mouseup', obtenerEvento);
-// //Mouse move
-// boton.addEventListener('mousemove', obtenerEvento);
+//doble click
+/*boton.addEventListener('dblclick', obtenerEvento);*/
 
-// function obtenerEvento(e) {
-//   console.log(`EVENTO: ${e.type}`);
-// }
+//mouse enter
+/*boton.addEventListener('mouseenter', obtenerEvento);*/
+
+//mouse leave
+/*boton.addEventListener('mouseleave', obtenerEvento);*/
+
+//mouse over
+/*boton.addEventListener('mouseover', obtenerEvento);*/
+
+//mouse out
+/*boton.addEventListener('mouseout', obtenerEvento);*/
+
+//mouse down
+/*boton.addEventListener('mousedown', obtenerEvento);*/
+
+//mouse up
+/*boton.addEventListener('mouseup', obtenerEvento);*/
+
+//mouse move
+boton.addEventListener('mousemove', obtenerEvento);
+
+function obtenerEvento (e) {
+	console.log(`EVENTO: ${e.type}`);
+}
