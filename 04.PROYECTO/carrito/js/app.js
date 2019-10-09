@@ -2,6 +2,7 @@
 const carrito = document.getElementById('carrito');
 const cursos = document.getElementById('lista-cursos');
 const listaCursos = document.querySelector('#lista-carrito tbody');
+const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
 
 //Listeners
 cargarEventListeners();
@@ -9,6 +10,10 @@ cargarEventListeners();
 function cargarEventListeners() {
 	//dispara cuando se presiona 'agregar carrito'
 	cursos.addEventListener('click', comprarCurso);
+	//cuando se elimina del carrito
+	carrito.addEventListener('click', eliminarCurso);
+	//al vaciar carrito
+	vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
 }
 
 //Funciones
@@ -22,7 +27,6 @@ function comprarCurso(e) {
 		leerDatosCurso(curso);
 	}
 }
-
 //funcion que lee los datos del curso
 function leerDatosCurso(curso) {
 	const infoCurso = {
@@ -34,7 +38,6 @@ function leerDatosCurso(curso) {
 
 	insertarCarrito(infoCurso);
 }
-
 //funcion muestra curso seleccionado en el carrito
 function insertarCarrito(curso) {
 	const row = document.createElement('tr');
@@ -49,4 +52,23 @@ function insertarCarrito(curso) {
 		</td>
 	`;
 	listaCursos.appendChild(row);
+
+}
+//Elimina el curso del carrito del DOM
+function eliminarCurso(e) {
+	e.preventDefault();
+	let curso;
+	if(e.target.classList.contains('borrar-curso')) {
+		e.target.parentElement.parentElement.remove();
+	}
+}
+//Vacia del carrito todos los cursos en el DOM
+function vaciarCarrito() {
+	//forma lenta
+	/*listaCursos.innerHTML = '';*/
+	//forma rapida recomendada
+	while(listaCursos.firstChild) {
+		listaCursos.removeChild(listaCursos.firstChild);
+	}
+	return false;
 }
