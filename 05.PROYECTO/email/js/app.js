@@ -13,10 +13,6 @@ eventListeners();
 function eventListeners() {
 	//Inicio de la aplicacion y deshabilitar submit
 	document.addEventListener('DOMContentLoaded', inicioApp);
-	// Campos del formulario
-	email.addEventListener('blur', validarCampo);
-	asunto.addEventListener('blur', validarCampo);
-	mensaje.addEventListener('blur', validarCampo);
 }
 
 
@@ -25,26 +21,7 @@ function eventListeners() {
 function inicioApp() {
 	//deshabilitar el envío
 	btnEnviar.disabled = true;
-	console.log(btnEnviar);
-}
-// Valida que el campo tenga algo escrito
-function validarCampo() {
-	// Se valida la longitud del texto y que no esté vacío
-	validarLongitud(this);
-
-	// console.log('Dentro del INPUT');
-}
-
-function validarLongitud(campo) {
-	if (campo.value.length > 0) {
-		console.log(campo.value.length);
-		campo.style.borderBottomColor = 'green';
-		campo.classList.remove('error');
-	} else {
-		campo.style.borderBottomColor = 'red';
-		campo.classList.add('error');
-	}
-	// console.log(campo);
+	console.log('btnEnviar');
 }
 
 
