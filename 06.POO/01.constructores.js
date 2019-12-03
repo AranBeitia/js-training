@@ -18,7 +18,7 @@ const cliente = {
 console.log(cliente.tipoCliente());
 console.log(cliente.saldo);
 
-//metodo alternativo
+//metodo alternativo de constructor
 function Cliente(nombre, saldo) {
 	this.nombre = nombre;
 	this.saldo = saldo;
