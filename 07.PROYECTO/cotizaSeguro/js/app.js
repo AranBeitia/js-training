@@ -4,6 +4,45 @@ function Seguro(marca, anio, tipo) {
 	this.anio = anio;
 	this.tipo = tipo;
 }
+Seguro.prototype.cotizarSeguro = function() {
+	// console.log(this.marca);
+	// console.log(this.anio);
+	// console.log(this.tipo);
+
+	/* TABLA PRECIOS SEGUROS
+			1 = americano 1.15
+			2 = asiatico 1.05
+			3 = europeo 1.35
+	*/
+	let cantidad;
+	const base = 2000;
+
+	switch(this.marca) {
+		case '1':
+			cantidad = base * 1.15
+			break;
+		case '2':
+			cantidad = base * 1.05
+			break;
+		case '3':
+			cantidad = base * 1.35
+			break;
+	}
+	//leer el año
+	const diferencia = new Date().getFullYear() - this.anio;
+	//cada año de diferencia hay que reducir el 3% del valor del seguro
+	cantidad -= ((diferencia * 3) * cantidad) / 100;
+	/*
+		Si el seguro es básico 		-> 30% más
+		Si el seguro es completo 	-> 50% más
+	*/
+	if (this.tipo === 'basico') {
+		cantidad *= 1.30;
+	} else {
+		cantidad *= 1.50;
+	}
+	return cantidad;
+}
 
 // Todo lo que se muestra
 function Interfaz() {
@@ -27,7 +66,34 @@ Interfaz.prototype.mostrarError = function(mensaje, tipo) {
 		document.querySelector('.mensaje').remove();
 	}, 3000);
 }
-
+//Imprime el resultado de la cotización
+Interfaz.prototype.mostrarResultado = function(seguro, total) {
+	const resultado = document.getElementById('resultado');
+	let marca;
+	
+	switch(seguro.marca) {
+		case '1':
+			marca = 'Americano';
+			break;
+		case '2':
+			marca = 'Asiatico';
+			break;
+		case '3':
+			marca = 'Europeo';
+			break;
+	}
+	//crear div
+	const div = document.createElement('div');
+	//insertar la información
+	div.innerHTML = `
+		<h2>Tu resumen:</h2>
+		<p>Marca: ${marca}</p>
+		<p>Año: ${seguro.anio}</p>
+		<p>Tipo: ${seguro.tipo}</p>
+		<p>Total: ${total}</p>
+	`;
+	resultado.appendChild(div);
+}
 
 //Event listener
 const formulario = document.getElementById('cotizar-seguro');
@@ -54,16 +120,20 @@ formulario.addEventListener('submit', function(e) {
 		//Interfaz imprimiendo un error
 		interfaz.mostrarError('Kitty says: Faltan datos, revisa el formulario y prueba de nuevo', 'error');
 	} else {
-		//Interfaz todo correcto
-		console.log('Todo correcto');
+		//Instanciar seguro y mostrar interfaz
+		const seguro = new Seguro(marcaSeleccionada, anioSeleccionado, tipo);
+		//Cotizar seguro
+		const cantidad = seguro.cotizarSeguro();
+		//Mostrar el resultado
+		interfaz.mostrarResultado(seguro, cantidad);
 	}
 })
 
 const max = new Date().getFullYear(),
 			min = max - 20;
 
-console.log(max);
-console.log(min);
+// console.log(max);
+// console.log(min);
 
 const selectAnios = document.getElementById('anio');
 
