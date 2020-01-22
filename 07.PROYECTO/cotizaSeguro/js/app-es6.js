@@ -1,89 +1,83 @@
 //Constructor para seguro
-function Seguro(marca, anio, tipo) {
-	this.marca = marca;
-	this.anio = anio;
-	this.tipo = tipo;
-}
-Seguro.prototype.cotizarSeguro = function() {
-	// console.log(this.marca);
-	// console.log(this.anio);
-	// console.log(this.tipo);
-
-	/* TABLA PRECIOS SEGUROS
-			1 = americano 1.15
-			2 = asiatico 1.05
-			3 = europeo 1.35
-	*/
-	let cantidad;
-	const base = 2000;
-
-	switch(this.marca) {
-		case '1':
-			cantidad = base * 1.15
-			break;
-		case '2':
-			cantidad = base * 1.05
-			break;
-		case '3':
-			cantidad = base * 1.35
-			break;
+class Seguro {
+	constructor(marca, anio, tipo) {
+		this.marca = marca;
+		this.anio = anio;
+		this.tipo = tipo;
 	}
-	//leer el año
-	const diferencia = new Date().getFullYear() - this.anio;
-	//cada año de diferencia hay que reducir el 3% del valor del seguro
-	cantidad -= ((diferencia * 3) * cantidad) / 100;
-	/*
+
+	cotizarSeguro() {
+		let cantidad;
+		const base = 2000;
+
+		switch (this.marca) {
+			case '1':
+				cantidad = base * 1.15;
+				break;
+			case '2':
+				cantidad = base * 1.05;
+				break;
+			case '3':
+				cantidad = base * 1.35;
+				break;
+		}
+		//leer el año
+		const diferencia = new Date().getFullYear() - this.anio;
+		//cada año de diferencia hay que reducir el 3% del valor del seguro
+		cantidad -= diferencia * 3 * cantidad / 100;
+		/*
 		Si el seguro es básico 		-> 30% más
 		Si el seguro es completo 	-> 50% más
 	*/
-	if (this.tipo === 'basico') {
-		cantidad *= 1.30;
-	} else {
-		cantidad *= 1.50;
+		if (this.tipo === 'basico') {
+			cantidad *= 1.3;
+		} else {
+			cantidad *= 1.5;
+		}
+		return cantidad;
 	}
-	return cantidad;
 }
 
 // Todo lo que se muestra
-function Interfaz() {}
+class Interfaz {
+	//Mensaje que se imprime en el HTML
+	mostrarMensaje(mensaje, tipo) {
+		const div = document.createElement('div');
 
-//Mensaje que se imprime en el HTML
-Interfaz.prototype.mostrarMensaje = function(mensaje, tipo) {
-	const div = document.createElement('div');
+		if (tipo === 'error') {
+			div.classList.add('mensaje', 'error');
+		} else {
+			div.classList.add('mensaje', 'correcto');
+		}
 
-	if (tipo === 'error') {
-		div.classList.add('mensaje', 'error');
-	} else {
-		div.classList.add('mensaje', 'correcto');
+		div.innerHTML = `${mensaje}`;
+		formulario.insertBefore(div, document.querySelector('.form-group'));
+
+		setTimeout(function() {
+			document.querySelector('.mensaje').remove();
+		}, 3000);
 	}
 
-	div.innerHTML = `${mensaje}`; 
-	formulario.insertBefore(div, document.querySelector('.form-group'));
+	//Imprime el resultado de la cotización
+	mostrarResultado(seguro, total) {
+		const resultado = document.getElementById('resultado');
+		let marca;
 
-	setTimeout(function() {
-		document.querySelector('.mensaje').remove();
-	}, 3000);
-}
-//Imprime el resultado de la cotización
-Interfaz.prototype.mostrarResultado = function(seguro, total) {
-	const resultado = document.getElementById('resultado');
-	let marca;
-	
-	switch(seguro.marca) {
-		case '1':
-			marca = 'Americano';
-			break;
-		case '2':
-			marca = 'Asiatico';
-			break;
-		case '3':
-			marca = 'Europeo';
-			break;
-	}
-	//crear div
-	const div = document.createElement('div');
-	//insertar la información
-	div.innerHTML = `
+		switch (seguro.marca) {
+			case '1':
+				marca = 'Americano';
+				break;
+			case '2':
+				marca = 'Asiatico';
+				break;
+			case '3':
+				marca = 'Europeo';
+				break;
+		}
+		//crear div
+		const div = document.createElement('div');
+		//insertar la información
+		div.innerHTML = `
 		<h2 class="header">Tu resumen:</h2>
 		<p>Marca: ${marca}</p>
 		<p>Año: ${seguro.anio}</p>
@@ -91,12 +85,13 @@ Interfaz.prototype.mostrarResultado = function(seguro, total) {
 		<p>Total: ${total}</p>
 	`;
 
-	const spinner = document.querySelector('#cargando img');
-	spinner.style.display = 'block';
-	setTimeout(function(){
-		spinner.style.display = 'none';
-		resultado.appendChild(div);
-	}, 3000);
+		const spinner = document.querySelector('#cargando img');
+		spinner.style.display = 'block';
+		setTimeout(function() {
+			spinner.style.display = 'none';
+			resultado.appendChild(div);
+		}, 3000);
+	}
 }
 
 //Event listener
@@ -124,7 +119,6 @@ formulario.addEventListener('submit', function(e) {
 		//Interfaz imprimiendo un error
 		interfaz.mostrarMensaje('Kitty says: Faltan datos, revisa el formulario y prueba de nuevo', 'error');
 	} else {
-
 		//Limpiar resultados anteriores
 		const resultados = document.querySelector('#resultado div');
 		if (resultados != null) {
@@ -139,10 +133,10 @@ formulario.addEventListener('submit', function(e) {
 		interfaz.mostrarResultado(seguro, cantidad);
 		interfaz.mostrarMensaje('Cotizando...', 'correcto');
 	}
-})
+});
 
 const max = new Date().getFullYear(),
-			min = max - 20;
+	min = max - 20;
 
 // console.log(max);
 // console.log(min);
