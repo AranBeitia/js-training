@@ -1,4 +1,18 @@
 class Interfaz {
+	constructor(){
+		this.init();
+	}
+	init(){
+		this.construirSelect();
+	}
+
+	construirSelect() {
+		cotizador.obtenerMonedasAPI()
+			.then(monedas => {
+				console.log(Object.entries (monedas.monedas.Data));
+			})
+	}
+
 	mostrarMensaje(mensaje, clases){
 		const div = document.createElement('div');
 		div.className = clases;
