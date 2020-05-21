@@ -72,8 +72,6 @@ class Interfaz {
 			document.querySelector('#resultado').innerHTML = templateHTML;
 			this.mostrarOcultarSpinner('none');
 		}, 3000);
-		
-	
 	}
 
 	//mostrar spinner de carga al enviar la cotizacion
