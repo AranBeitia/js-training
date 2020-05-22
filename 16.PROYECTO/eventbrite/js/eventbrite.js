@@ -1,6 +1,6 @@
 class EventBrite {
 	constructor(){
-		this.token_auth = 'NKIPO2UZV2TBZKPHMA3B';
+		this.token_auth = '';
 		this.ordenar = 'date';
 	}
 	//mostrar resultados de la busqueda
