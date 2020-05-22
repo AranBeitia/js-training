@@ -3,6 +3,11 @@ class EventBrite {
 		this.token_auth = 'NKIPO2UZV2TBZKPHMA3B';
 		this.ordenar = 'date';
 	}
+	//mostrar resultados de la busqueda
+	async obtenerEventos(evento, categoria) {
+		const respuestaEvento = await fetch(``);
+	}
+
 	//obtiene las categorias en init()
 	async obtenerCategorias(){
 		//consultar las categorias a la REST API de eventbrite
