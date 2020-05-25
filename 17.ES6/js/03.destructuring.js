@@ -1,40 +1,49 @@
-//Destructing a funciones
+//Destructuring a funciones
 
-const ciudades = ['Londres', 'New York', 'Madrid', 'Paris', {
-	idioma: 'ingles'
-}];
+function reserva (completo, opciones) {
 
-const [
-	primeraCiudad,
-	segundaCiudad
-] = ciudades;
+	/* forma vieja de hacerlo */
+	// opciones = opciones || {};
+	// let metodo = opciones.metodoPago,
+	// 		cantidad = opciones.cantidad,
+	// 		dias = opciones.dias;
 
-console.log(primeraCiudad, segundaCiudad);
+	/* forma nueva de hacerlo */
+	let { metodoPago, cantidad, dias} = opciones;
 
-const [ , , ciudad , paris ] = ciudades;
-console.log(ciudad, paris);
-
-console.log(ciudades);
-
-//ejemplo avanzado
-const cliente = {
-	tipo: 'premium',
-	saldo: 30000,
-	datos: {
-		nombre: 'Pedro',
-		apellido: 'Perez',
-		residencia: {
-			ciudad: 'Mexico'
-		}
-	},
-	movimientos: ['12-03-2018', '12-03-2017', '12-03-2016']
+	console.log(metodoPago, cantidad, dias);
 }
 
-let {
-	tipo,
-	datos,
-	datos: {residencia},
-	movimientos : [ , dos]
-} = cliente;
+function nuevaReserva(completo, 
+	{
+		metodoPago = 'efectivo', 
+		cantidad = 0, 
+		dias = 0
+	} = {}) 
+{
+	if(completo){
+		console.log('Proceder a logear...');
+	} else {
+		console.log('Abandonar');
+	}
+}
 
-console.log(tipo, datos.apellido, residencia, dos);
+//
+reserva (
+	true,
+	{
+		metodoPago: 'tarjeta',
+		cantidad: 2000,
+		dias: 3
+	}
+)
+
+nuevaReserva(
+	true,
+	{
+		metodoPago: 'tarjeta',
+		cantidad: 5000,
+		dias: 5
+	}
+)
+
