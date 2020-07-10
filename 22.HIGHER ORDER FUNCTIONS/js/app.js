@@ -3,7 +3,7 @@ const autos = [
 		marca: 'BMW',
 		modelo: 'Serie 3',
 		year: 2012,
-		precio: 30000,
+		precio: 40000,
 		puertas: 4,
 		color: 'Blanco',
 		transmision: 'automatico'
@@ -138,24 +138,34 @@ autos.forEach(item => {
 
 /* map (a diferencia de forEach que sólo recorre el array, map lo crea también)*/
 let resultados = autos.map(item => item)
-console.table(resultados)
+// console.table(resultados)
 
 /* filter */
+let resultFilter = autos.filter(auto => {
+	return auto.marca !== 'BMW'
+})
+let resultFilter1 = autos.filter(item => item.year <= 2017 && item.year>=2016)
+
+// console.table(resultFilter)
 let result = autos.filter(auto => auto.marca !== 'BMW')
 let resul = autos.filter(auto => auto.color === 'Rojo')
 let res = autos.filter (item => item.year === 2018)
-
-
-
-
-
 let res1 = autos.filter(item => item.year <= 2017 && item.year>= 2016)
-console.table(res1)
+// console.table(res1)
 
-/* find */
+/* find (la diferencia es que trae el primer elemento que encuentre)*/
+let resFind = autos.find(auto => auto.modelo === 'Mustang')
+// console.log(resFind)
 
-/* reduce */
+/* reduce (toma todos los valores y devuelve un valor único)*/
+let resReduce = autos.reduce((total, auto) => total + auto.precio, 0)
+console.log(resReduce)
 
-/* some */
+const numeros = [1, 2, 3]
+let resulNumeros = numeros.reduce((total, numero) => total + numero, 100)
+console.log(resulNumeros)
 
-
+/* some (devueve booleano: si existe o no existe)*/
+let resSom = autos.some(auto => auto.marca === 'BMW')
+let resSom2 = autos.some(auto => auto.marca === 'Ferrari')
+console.log(resSom2)
