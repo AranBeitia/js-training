@@ -1,7 +1,6 @@
 // /* ASYNC AWAIT */
 //la promesa tiene que ser (resolve, reject)
 
-
 var nombre = null
 
 function actualizarNombre() {
