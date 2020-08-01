@@ -1,22 +1,24 @@
-// /* ASYNC AWAIT */
-//la promesa tiene que ser (resolve, reject)
+// /* LOCALSTORAGE CON OBJETOS */
 
-var nombre = null
-
-function actualizarNombre() {
-  console.log('Actualizacion empezada')
-  return new Promise(resolve => {
-    setTimeout(() => {
-      console.log('Actualizacion comletada');
-      resolve ('Aran')
-    }, 1000)
-  })
+const coche = {
+  marca: 'Ferrari',
+  color: 'rojo',
+  precio: 600000
 }
 
-async function saludar() {
-  nombre = await actualizarNombre()
-  console.log('Actualizacion completada');
-  console.log('Hola, me llamo ' + nombre);
-}
+// console.log(coche)
+// localStorage.setItem('coche', coche)
+// console.log(localStorage.getItem('coche'))
 
-saludar()
+const cocheString = JSON.stringify(coche)
+localStorage.setItem('coche', cocheString)
+
+let cocheStorage = localStorage.getItem('coche')
+cocheStorage = JSON.parse(cocheStorage)//pasa el json a objeto
+cocheStorage.color= 'negro'
+
+//para actualizar en localstorage el valor modificado
+cocheStorage = JSON.stringify(cocheStorage)
+localStorage.setItem('coche', cocheStorage)
+
+console.log(cocheStorage);
