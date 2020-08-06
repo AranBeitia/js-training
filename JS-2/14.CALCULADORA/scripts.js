@@ -1,7 +1,7 @@
 var operator = null
 var inputValueMemo = 0
 
-//coger el valor
+//coger el valor al hacer click
 function getContentClick (event) {
   const value = event.target.innerHTML
   filterAction(value)
@@ -27,6 +27,8 @@ const filterAction= value => {
   value === '/' ? setOperation('/') : null
   value === '%' ? setOperation('%') : null
   value === '+/-' ? setOperation('+/-') : null
+
+  value == '=' ? calculation() : null
 }
 
 function addValueInput (value) {
@@ -51,16 +53,32 @@ function setOperation (operator) {
 
 function calculation() {
   const inputScreen = document.getElementsByClassName('calculator__screen')[0]
-  let valueOne = this.inputValueMemo
-  let valueTwo = inputScreen.value
+  let valueOne = transformCommaToPoint(this.inputValueMemo)
+  let valueTwo = transformCommaToPoint(inputScreen.value)
   let total = 0
 
   if(this.operator === '+' && inputScreen.value !== '') {
     total = valueOne + valueTwo
   }
+
+  total = transformPointToComma(total)
   this.inputValueMemo = total
   inputScreen.value = ''
   inputScreen.placeholder = total
+}
+
+function transformCommaToPoint (value) {
+  if(typeof value !== 'number') {
+    let resultTransform = value.replace(',', '.')
+    return parseFloat(resultTransform)
+  }
+  return value
+}
+
+function transformPointToComma(value) {
+  let resultTransform = value.toString()
+  resultTransform = resultTransform.replace('.', ',')
+  return resultTransform
 }
 
 
