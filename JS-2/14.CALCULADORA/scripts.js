@@ -28,6 +28,7 @@ const filterAction= value => {
   value === '%' ? setOperation('%') : null
   value === '+/-' ? setOperation('+/-') : null
 
+  value === 'AC' ? resetCalculator() : null
   value == '=' ? calculation() : null
 }
 
@@ -37,6 +38,11 @@ function addValueInput (value) {
 
   if(inputValue === '0' && inputValue.length === 1 && value !== ',') {
     inputScreen.value = value
+    return
+  }
+
+  if(inputScreen.value === '' && value == ',') {
+    inputScreen.value = 0 + value
     return
   }
   inputScreen.value = inputValue + value
@@ -61,10 +67,51 @@ function calculation() {
     total = valueOne + valueTwo
   }
 
+  if (this.operator === '-' && inputScreen.value !== '') {
+    if(valueOne !== 0) {
+      total = valueOne - valueTwo
+    } else {
+      total = valueTwo
+    }
+  }
+
+  if (this.operator === '*' && inputScreen.value !== '') {
+    if(valueOne !== 0) {
+      total = valueOne * valueTwo
+    } else {
+      total = 0
+    }
+  }
+
+  if ( this.operator === '/' && inputScreen.value !== '') {
+    if(valueOne !== 0) {
+      total = valueOne / valueTwo
+    } else {
+      total = valueTwo
+    }
+  }
+
+  if(this.operator === '%' && inputScreen.value !== '') {
+    total = valueTwo / 100
+  }
+
+  if (this.operator === '+/-' && inputScreen.value !== '') {
+    if(valueTwo > 0) {
+      total = -valueTwo
+    }
+  }
+
   total = transformPointToComma(total)
   this.inputValueMemo = total
   inputScreen.value = ''
   inputScreen.placeholder = total
+}
+
+const resetCalculator = () => {
+  const inputScreen = document.getElementsByClassName('calculator__screen')[0]
+  inputScreen.value = 0
+  this.inputValueMemo = 0
+  this.operator = null
 }
 
 function transformCommaToPoint (value) {
@@ -79,28 +126,4 @@ function transformPointToComma(value) {
   let resultTransform = value.toString()
   resultTransform = resultTransform.replace('.', ',')
   return resultTransform
-}
-
-
-
-
-/**/
-function presionarBoton () {
-  console.log('presiona boton');
-}
-
-function mostrarPantalla () {
-
-}
-
-function calcular () {
-
-}
-
-function resultado () {
-
-}
-
-function borrar () {
-  
 }
