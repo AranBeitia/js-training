@@ -116,3 +116,11 @@ body {
   background-color: #008abf !important;
   border: 1px solid #008abf;
 }
+
+/* custom bootstrap */
+@media (min-width: 600px) {
+  .navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+}
