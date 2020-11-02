@@ -2,6 +2,7 @@ const CARD_PRODUCTS = 'cartProductsId'
 
 document.addEventListener('DOMContentLoaded', () => {
   loadProducts()
+  loadProductCard()
 })
 
 function getProductsDB() {
@@ -54,7 +55,6 @@ function addProductCart (idProduct) {
   let arrayProductId = []
   let localStorageItems = localStorage.getItem(CARD_PRODUCTS)
 
-
   if(localStorageItems === null) {
     arrayProductId.push(idProduct)
     localStorage.setItem(CARD_PRODUCTS, arrayProductId)
@@ -62,44 +62,91 @@ function addProductCart (idProduct) {
     let productsId = localStorage.getItem(CARD_PRODUCTS)
 
     if (productsId.length > 0) {
-      productsId += ', ' + idProduct
+      productsId += ',' + idProduct
     } else {
       productsId = productId
     }
     localStorage.setItem(CARD_PRODUCTS, productsId)
   }
-  console.log('ya hay contenido')
+  loadProductCard()
+}
 
+async function loadProductCard () {
+  const products = await getProductsDB()
 
-  // const HTMLtemplate = ''
+  //Convertimos el resultado de localStorage en un array
+  const localStorageItems = localStorage.getItem(CARD_PRODUCTS)
+  let html = ''
 
-  // forEach
+  if (!localStorageItems) {
+    html = `
+      <div class="cart-product empty">
+        <p>Carrito vacío</p>
+      </div>
+    `
+  } else {
+    const idProductsSplit = localStorageItems.split(',')
+    //Eliminar ids duplicados
+    const idProductsCart = Array.from(new Set(idProductsSplit))
 
-  // document.getElementsByClassName('cart-products')[0].innerHTML = HTMLtemplate
-  // console.log('añadir producto con su ID: ' + idProduct)
+    idProductsCart.forEach(id => {
+    products.forEach(product => {
+      if(id == product.id) {
+        const quantity = countDuplicatesID(id, idProductsSplit)
+        const totalPrice = product.price * quantity
+        html += `
+          <div class="cart-product">
+            <img src="${product.image}" alt="${product.name}" />
+            <div class="cart-product-info">
+              <span class="quantity">${quantity}</span>
+              <p>${product.name}</p>
+              <p>${totalPrice.toFixed(2)}</p>
+              <div class="change-quantity">
+                <button>-</button>
+                <button>+</button>
+              </div>
+              <div class="cart-product-delete">
+                <button>Eliminar</button>
+              </div>
+            </div>
+          </div>
+        `
+      }
+    })
+  })
+  }
+  document.getElementsByClassName('cart-products')[0].innerHTML = html
+}
+
+function countDuplicatesID (value, arrayIds) {
+  let count = 0
+  arrayIds.forEach(id => {
+    if(value == id) {
+      count ++
+    }
+  })
+  return count
 }
 
 
 
 
-// function addProduct(idProduct) {
-//   let arrayProductId = []
-//   let localStorageItems = localStorage.getItem(CARD_PRODUCTS)
 
-//   if(localStorageItems === null) {
-//     arrayProductId.push(idProduct)
-//     localStorage.setItem(CARD_PRODUCTS, arrayProductId)
-//   } else {
-//     let productsId = localStorage.getItem(CARD_PRODUCTS)
-//     if(productsId.length > 0) {
-//       productsId += ', ' + idProduct
-//     } else {
-//       productsId = productId
-//     }
-//     localStorage.setItem(CARD_PRODUCTS, productsId)
-//   }
-//   loadProductCard()
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // async function loadProductCard () {
 //   const products = await getProductsDb()
