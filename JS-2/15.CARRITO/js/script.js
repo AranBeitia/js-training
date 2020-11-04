@@ -1,132 +1,60 @@
+// PAGINA
+/*
+  1. cargar de BBDD items
+  2. pintar items
 
+  3. boton añadir item al carrito (y sumar cantidad y precio)
+*/
 document.addEventListener('DOMContentLoaded', () => {
-  loadProducts()
+  loadItems()
 })
 
-function getProductsDB () {
-  const URL = './dbProducts.json'
-
+function getItemDB() {
+  const URL = 'dbProducts.json'
   return fetch(URL)
-  .then(response => response.json())
-  .then(result => result)
-  .catch(err => console.log(err))
+    .then(response => response.json())
+    .then(data => data)
+    .catch(err => console.log(err))
 }
 
-async function loadProducts () {
-  const products = await getProductsDB()
+async function loadItems() {
+  const items = await getItemDB()
+  let html = ``
 
-  let html = ''
-
-  products.forEach (product => {
+  items.forEach(item => {
     html += `
     <div class="col-3 product-container">
       <div class="card product">
-        <img src="${product.image}" class="card-img-top" alt="${product.name}">
+        <img src="${item.image}" class="card-img-top" alt="${item.name}">
         <div class="card-body">
-          <h5 class="card-title">${product.name}</h5>
-          <p class="card-text">${product.extraInfo}</p>
-          <p class="card-text">${product.price} € / Unidad</p>
-          <button type="button" class="btn btn-primary btn-cart" onClick="">Añadir al carrito</button>
+          <h5 class="card-title">${item.name}</h5>
+          <p class="card-text">${item.extraInfo}</p>
+          <p class="card-text">${item.price}€ / ud.</p>
+          <button type="button" onClick="addItem(${item.id})" class="btn btn-primary btn-cart">Añadir al
+            carrito</button>
         </div>
       </div>
     </div>
-    ` 
+    `
   })
-
   document.getElementsByClassName('products')[0].innerHTML = html
-
-  console.log(products);
 }
 
-function openCloseCart () {
-  const cartProducts = document.getElementsByClassName('cart-products')[0]
+// CARRITO
+/*
+  1. abrir / cerrar carrito
+    1.1 carrito vacio
+    1.2 carrito items:(localstorage)
+      1. crear variales
+      2. array variables
+      3. añadir items
+      4. cargar items (DOM)
 
-  cartProducts.classList.forEach(item => {
-    if (item === 'hidden') {
-      cartProducts.classList.remove('hidden')
-      cartProducts.classList.add('active')
-    }
+  2. boton añadir item (y sumar)
+  3. boton restar item (y restar)
+  4. boton eliminar item
+*/
 
-    if(item === 'active') {
-      cartProducts.classList.remove('active')
-      cartProducts.classList.add('hidden')
-    }
-  })
-  console.log(cartProducts.classList)
-
+function addItem (id) {
+  console.log('añadir item ' +  id)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const CARD_PRODUCTS = "cartProductsId"
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   loadProducts()
-// })
-
-// function getProductsDB() {
-//   const url = './dbProducts.json'
-//   return fetch(url)
-//   .then(response =>  response.json())
-//   .then(result =>  result)
-//   .catch(err => console.log(err))
-// }
-
-// async function loadProducts () {
-//   const products = await getProductsDB()
-//   let html = ''
-//   products.forEach(product => {
-//     html += `
-//     <div class="col-3 product-container">
-//       <div class="card product">
-//         <img src="${product.image}" class="card-img-top" alt="${product.name}">
-//         <div class="card-body">
-//           <h5 class="card-title">${product.name}</h5>
-//           <p class="card-text">${product.extraInfo}</p>
-//           <p class="card-text">${product.price} € / Unidad</p>
-//           <button type="button" class="btn btn-primary btn-cart" onClick="addProduct(${product.id})">Añadir al carrito</button>
-//         </div>
-//       </div>
-//     </div>
-//     `
-//   })
-//   document.getElementsByClassName('products')[0].innerHTML = html
-// }
-
-// function openCloseCart () {
-//   const constainerCart = document.getElementsByClassName('cart-products')[0]
-
-//   constainerCart.classList.forEach( item => {
-//     if (item === 'hidden') {
-//       constainerCart.classList.remove('hidden')
-//       constainerCart.classList.add('active')
-//     }
-
-//     if (item === 'active') {
-//       constainerCart.classList.remove('active')
-//       constainerCart.classList.add('hidden')
-//     }
-//   })
-//   console.log(constainerCart.classList)
-// }
-
-// function addProductCart (idProduct) {
-
-// }
