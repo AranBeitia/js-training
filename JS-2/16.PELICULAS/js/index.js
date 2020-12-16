@@ -3,6 +3,7 @@ const API_KEY = 'c6163ef75c8e34a1d6c622ff9958833e'
 
 document.addEventListener('DOMContentLoaded', () => {
   renderNewMovies()
+  renderPopularMovies()
 })
 
 const getNewMovies = () => {
@@ -16,7 +17,6 @@ const getNewMovies = () => {
 
 const renderNewMovies = async () => {
   const newMovies = await getNewMovies()
-
   let html = ''
 
   newMovies.forEach((movie, index) => {
@@ -47,4 +47,36 @@ const renderNewMovies = async () => {
     </a>
   `
   document.getElementsByClassName('latest-movies__inner')[0].innerHTML = html
+}
+
+const getPopularMovies = () => {
+  const url = `${URL_PATH}/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=1`
+
+  return fetch (url)
+  .then(response => response.json())
+  .then(result => result.results)
+  .catch(error => console.log(error))
+}
+
+const renderPopularMovies = async () => {
+  const movies = await getPopularMovies()
+  let html= ''
+
+  movies.forEach ( (movie, index) => {
+    const { id, title, poster_path } = movie
+    const moviePoster = `https://image.tmdb.org/t/p/original${poster_path}`
+    const urlMovie = `../movie.html?id=${id}`
+
+    if(index < 5) {
+      html += `
+        <li class="list-group-item popular__item">
+          <img src="${moviePoster}" alt="${title}" class="movie__image">
+          <h3 class="movie__title">${title}</h3>
+          <a href="${urlMovie}" class="btn btn-primary">Ver más</a>
+        </li>
+      `
+    }
+  })
+
+  document.getElementsByClassName('popular__list')[0].innerHTML = html
 }
