@@ -3,12 +3,12 @@ const API_KEY = 'c6163ef75c8e34a1d6c622ff9958833e'
 
 document.addEventListener('DOMContentLoaded', () => {
   renderNewMovies()
-  renderPopularMovies()
+  renderListMovies('popular', 'popular__list')
+  renderListMovies('top_rated', 'rated__list')
 })
 
-const getNewMovies = () => {
-  const url = `${URL_PATH}/3/movie/now_playing?api_key=${API_KEY}&language=es-ES&page=1`
-  
+const getMovies = (type) => {
+  const url = `${URL_PATH}/3/movie/${type}?api_key=${API_KEY}&language=es-ES&page=1`
   return fetch(url)
     .then(response => response.json())
     .then(result => result.results)
@@ -16,13 +16,13 @@ const getNewMovies = () => {
 }
 
 const renderNewMovies = async () => {
-  const newMovies = await getNewMovies()
+  const newMovies = await getMovies('now_playing')
   let html = ''
 
   newMovies.forEach((movie, index) => {
     const { id, title, overview, backdrop_path } = movie
     const urlImage = `https://image.tmdb.org/t/p/original${backdrop_path}`
-    const urlMovie = `../movie.html?id=${id}`
+    const urlMovie = `movie.html?id=${id}`
 
     html += `
     <div class="carousel-item ${index === 0 ? 'active' : ''}">
@@ -49,27 +49,18 @@ const renderNewMovies = async () => {
   document.getElementsByClassName('latest-movies__inner')[0].innerHTML = html
 }
 
-const getPopularMovies = () => {
-  const url = `${URL_PATH}/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=1`
+const renderListMovies = async (type, classCss) => {
+  const movies = await getMovies(type)
+  let html = ''
 
-  return fetch (url)
-  .then(response => response.json())
-  .then(result => result.results)
-  .catch(error => console.log(error))
-}
-
-const renderPopularMovies = async () => {
-  const movies = await getPopularMovies()
-  let html= ''
-
-  movies.forEach ( (movie, index) => {
+  movies.forEach((movie, index) => {
     const { id, title, poster_path } = movie
     const moviePoster = `https://image.tmdb.org/t/p/original${poster_path}`
-    const urlMovie = `../movie.html?id=${id}`
+    const urlMovie = `movie.html?id=${id}`
 
-    if(index < 5) {
+    if (index < 5) {
       html += `
-        <li class="list-group-item popular__item">
+        <li class="list-group-item list__item">
           <img src="${moviePoster}" alt="${title}" class="movie__image">
           <h3 class="movie__title">${title}</h3>
           <a href="${urlMovie}" class="btn btn-primary">Ver más</a>
@@ -78,5 +69,5 @@ const renderPopularMovies = async () => {
     }
   })
 
-  document.getElementsByClassName('popular__list')[0].innerHTML = html
+  document.getElementsByClassName(classCss)[0].innerHTML = html
 }

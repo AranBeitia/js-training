@@ -11,10 +11,10 @@
   padding: .8rem 1.5rem;
 }
 
-.popular {
+.list {
   padding: 1rem;
 }
-.popular__title {
+.list__title {
   text-align: center;
   padding: 1rem 0;
   margin: 2rem 0;
@@ -22,7 +22,7 @@
   color: #fff;
 }
 
-.popular__item {
+.list__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
