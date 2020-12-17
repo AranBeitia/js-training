@@ -1,0 +1,22 @@
+.movie-detail {
+  height: calc(100vh - 57.92px);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 0;
+}
+
+.bg-color {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.movie-detail__poster {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.movie-details__image {
+  border: 2px solid #fff;
+}
