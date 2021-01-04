@@ -7,7 +7,7 @@
   <title>Populares</title>
 
   <link rel="stylesheet" href="./css/bootstrap.min.css">
-  <link rel="stylesheet" href="./css/popular.css">
+  <link rel="stylesheet" href="./css/now-playing.css">
 
   <!-- <script src="./js/jquery-3.5.1.min.js"></script>
   <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script> -->
@@ -16,7 +16,7 @@
   <script src="./js/popular.js"></script>
 </head>
 
-<body id="home">
+<body>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -41,7 +41,11 @@
       </div>
     </div>
   </nav>
-  <h1>populares</h1>
+  <div class="container mt-5">
+    <h1 class="text-center mb-5">Películas populares</h1>
+    <div class="row list-cards"></div>
+    <nav aria-label="Page navigation example" class="navigation mt-5"></nav>
+  </div>
 </body>
 
 </html>
